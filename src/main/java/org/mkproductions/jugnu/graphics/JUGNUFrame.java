@@ -32,19 +32,15 @@ public class JUGNUFrame extends JFrame implements Runnable {
     public JUGNUFrame() {
         this.paintingThread = new Thread(this);
         ArrayList<ClassData> classesData = new ArrayList<>();
-
         PackageReader packageReader = PackageReader.getInstance();
-
         for (Class<? extends ClassifyAbleClass> cls : packageReader.findAllClassesAnnotatedWith("org.mkproductions.jugnu")) {
             ClassData classData = new ClassData(cls.getName());
             // Storing all the constructors
             for (Constructor<ClassifyAbleConstructor> cons : packageReader.findAllAnnotatedConstructorsFromClass(cls))
                 classData.addConstructor(cons);
-
             // Storing all the fields
             for (Field field : packageReader.findAllAnnotatedFieldsFromClass(cls))
                 classData.addField(field);
-
             // Storing all the Methods
             for (Method method : packageReader.findAllAnnotatedMethodsFromClass(cls))
                 classData.addMethod(method);

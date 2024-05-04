@@ -8,20 +8,17 @@ import java.awt.*;
 import java.util.ArrayList;
 
 class JUGNUPanel extends JPanel {
-    private final ArrayList<ClassData> classesData;
     public boolean running;
     public static final long TARGET_FPS = 60;
     private final ClassesDataRender classesDataRender;
 
     public JUGNUPanel(int panelWidth, int panelHeight, ArrayList<ClassData> classesData) {
-        this.classesData = classesData;
-        this.classesDataRender = new ClassesDataRender(panelWidth / 2, panelHeight / 2, this.classesData);
+        this.classesDataRender = new ClassesDataRender(panelWidth / 2, panelHeight / 2, classesData);
         this.running = false;
         setSize(panelWidth, panelHeight);
         setBounds(0, 0, panelWidth, panelHeight);
         setVisible(true);
     }
-
 
     public void resume() {
         this.running = true;
@@ -30,7 +27,6 @@ class JUGNUPanel extends JPanel {
     public void pauseRendering() {
         this.running = false;
     }
-
 
     @Override
     public void paint(Graphics graphics) {
@@ -51,7 +47,6 @@ class JUGNUPanel extends JPanel {
     private void draw(Graphics2D g) {
         setBackground(Color.BLACK);
         g.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-        // Text alignment
         this.classesDataRender.renderData(g);
     }
 }
